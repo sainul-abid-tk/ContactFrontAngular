@@ -1,55 +1,150 @@
-<div style="height: 100vh;" class="position-relative ">
-    <div style="height: 50px;width: 50px;bottom: 10%; right: 3%;" class="bg-success d-flex justify-content-center align-items-center  border-success  position-absolute   rounded-circle "><i class="fa-solid fa-plus fs-3 text-white fw-bolder "></i>
+<div style="height: 100vh" class="position-relative">
+  <div
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModal1"
+    style="height: 50px; width: 50px; bottom: 10%; right: 3%; cursor: pointer"
+    class="bg-success d-flex justify-content-center align-items-center border-success position-absolute rounded-circle"
+  >
+    <i class="fa-solid fa-plus fs-3 text-white fw-bolder"></i>
+  </div>
+  <!-- Modal -->
+  <div
+    class="modal fade modal-lg"
+    id="exampleModal1"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header w-100 justify-content-center d-flex">
+          <h1 class="modal-title text-center fs-2" id="exampleModalLabel">
+            Add New Contact
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form #addContacts="ngForm">
+            <input
+              [(ngModel)]="contact.name"
+              name="name"
+              type="text"
+              required
+              class="form-control mb-3"
+              placeholder="Enter Name"
+            />
+            <input
+              [(ngModel)]="contact.phone"
+              name="phone"
+              required
+              pattern="[0-9]{10}"
+              #contPhone="ngModel"
+              type="number"
+              class="form-control mb-3"
+              placeholder="Enter Phone Number"
+            />
+            <div
+              *ngIf="contPhone.invalid && contPhone.touched"
+              class="text-danger fw-bold"
+            >
+              *Invalid PhoneNumber
+            </div>
+            <input
+              [(ngModel)]="contact.whatsapp"
+              name="whatsapp"
+              type="number"
+              required
+              pattern="[0-9]{10}"
+              #contaWhatsapp="ngModel"
+              class="form-control mb-3"
+              placeholder="Enter Whatsapp Number"
+            />
+            <div
+              *ngIf="contaWhatsapp.invalid && contaWhatsapp.touched"
+              class="text-danger fw-bold"
+            >
+              *Invalid WhatsappNumber
+            </div>
+            <input
+              [(ngModel)]="contact.email"
+              name="email"
+              email
+              required
+              #contEmail="ngModel"
+              type="email"
+              class="form-control mb-3"
+              placeholder="Enter Email"
+            />
+            <div
+              *ngIf="contEmail.invalid && contEmail.touched"
+              class="text-danger fw-bold"
+            >
+              *Invalid Email
+            </div>
+            <textarea
+              [(ngModel)]="contact.address"
+              name="address"
+              class="form-control w-100 mb-3"
+              placeholder="Enter Address"
+              id="myTextArea"
+              name="myTextArea"
+              rows="4"
+              cols="50"
+              required
+            ></textarea>
+            <input
+              [(ngModel)]="contact.location"
+              name="location"
+              type="text"
+              class="form-control mb-3"
+              placeholder="Enter Location Link"
+              required
+            />
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+            Close
+          </button>
+          <button (click)="addContact()" [disabled]="addContacts.invalid " type="submit" class="btn btn-success">Save</button>
+        </div>
+      </div>
     </div>
-    <div class="row p-3">
-        <div class="col-lg-3 mt-3 ">
-            <div class="card border-0 " style="width: 18rem;background-image: url('https://www.clipartmax.com/png/full/108-1083386_post-it-note-paper-link-free-sticky-notes-clip-art-sticky-note.png');background-size: cover;">
-                <div class="card-body">
-                  <h5 class="card-title overflow-hidden mb-2  fw-bold  fs-5 mt-5 ">Abid Tk</h5>
-                  <h6 class="card-subtitle mb-2 text-body-secondary overflow-hidden mb-4 ">Anakkara,Palakad</h6>
-                  <p class="card-text fs-6 fst-italic  fw-bolder "> <i class="fa-solid fa-phone" style="color: #63E6BE;"></i> 6238836355</p>
-                  <div>
-                    <button class="btn btn-primary w-100 ">View</button>
-                  </div>
-                </div>
-              </div>
+  </div>
+  <div class="row p-3">
+    <div *ngFor="let contact of allContacts" class="col-lg-3 mt-3">
+      <div
+        class="card border-0"
+        style="
+          width: 18rem;
+          background-image: url('https://www.clipartmax.com/png/full/108-1083386_post-it-note-paper-link-free-sticky-notes-clip-art-sticky-note.png');
+          background-size: cover;
+        "
+      >
+        <div class="card-body">
+          <h5 class="card-title overflow-hidden mb-2 fw-bold fs-5 mt-5">
+            {{contact.name}}
+          </h5>
+          <h6
+            class="card-subtitle mb-2 text-body-secondary overflow-hidden mb-4"
+          >
+            {{contact.location}}
+          </h6>
+          <p class="card-text fs-6 fst-italic fw-bolder">
+            <i class="fa-solid fa-phone" style="color: #63e6be"></i> {{contact.phone}}
+          </p>
+          <div>
+            <button routerLink='/view/{{contact.id}}' class="btn btn-primary w-100">
+              View
+            </button>
+          </div>
         </div>
-        <div class="col-lg-3 mt-3 ">
-            <div class="card border-0 " style="width: 18rem;background-image: url('https://www.clipartmax.com/png/full/108-1083386_post-it-note-paper-link-free-sticky-notes-clip-art-sticky-note.png');background-size: cover;">
-                <div class="card-body">
-                  <h5 class="card-title overflow-hidden mb-2  fw-bold  fs-5 mt-5 ">Abid Tk</h5>
-                  <h6 class="card-subtitle mb-2 text-body-secondary overflow-hidden mb-4 ">Anakkara,Palakad</h6>
-                  <p class="card-text fs-6 fst-italic  fw-bolder "> <i class="fa-solid fa-phone" style="color: #63E6BE;"></i> 6238836355</p>
-                  <div>
-                    <button class="btn btn-primary w-100 ">View</button>
-                  </div>
-                </div>
-              </div>
-        </div>
-        <div class="col-lg-3 mt-3 ">
-            <div class="card border-0 " style="width: 18rem;background-image: url('https://www.clipartmax.com/png/full/108-1083386_post-it-note-paper-link-free-sticky-notes-clip-art-sticky-note.png');background-size: cover;">
-                <div class="card-body">
-                  <h5 class="card-title overflow-hidden mb-2  fw-bold  fs-5 mt-5 ">Abid Tk</h5>
-                  <h6 class="card-subtitle mb-2 text-body-secondary overflow-hidden mb-4 ">Anakkara,Palakad</h6>
-                  <p class="card-text fs-6 fst-italic  fw-bolder "> <i class="fa-solid fa-phone" style="color: #63E6BE;"></i> 6238836355</p>
-                  <div>
-                    <button class="btn btn-primary w-100 ">View</button>
-                  </div>
-                </div>
-              </div>
-        </div>
-        <div class="col-lg-3">
-            <div class="card border-0 " style="width: 18rem;background-image: url('https://www.clipartmax.com/png/full/108-1083386_post-it-note-paper-link-free-sticky-notes-clip-art-sticky-note.png');background-size: cover;">
-                <div class="card-body">
-                  <h5 class="card-title overflow-hidden mb-2  fw-bold  fs-5 mt-5 ">Abid Tk</h5>
-                  <h6 class="card-subtitle mb-2 text-body-secondary overflow-hidden mb-4 ">Anakkara,Palakad</h6>
-                  <p class="card-text fs-6 fst-italic  fw-bolder "> <i class="fa-solid fa-phone" style="color: #63E6BE;"></i> 6238836355</p>
-                  <div>
-                    <button class="btn btn-primary w-100 ">View</button>
-                  </div>
-                </div>
-              </div>
-        </div>
-        
+      </div>
     </div>
+  </div>
 </div>

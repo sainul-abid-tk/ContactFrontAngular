@@ -1,1 +1,17 @@
-<p>view works!</p>
+<div class="d-flex  justify-content-center align-items-center  " style="height: 100vh;width: 100%;">
+    <div class="w-50  shadow-lg p-5 " style="height:fit-content; width: fit-content;">
+    <h1 class="text-center ">{{contact.name}}</h1>
+        <div class="mt-5">
+        <li class="fs-5 mb-3 "><span class="text-success">Phone Number:</span>{{contact.phone}}</li>
+        <li class="fs-5 mb-3 "><span class="text-success">Whatsapp Number:</span>{{contact.whatsapp}}</li>
+        <li class="fs-5 mb-3 "><span class="text-success">Email:</span>{{contact.email}}</li>
+        <li class="fs-5 mb-3" style="width:fit-content;"><span class="text-success">Address:</span>{{contact.address}}</li>
+        <li class="fs-5 mb-3 text-primary "><span class="text-success">Location: </span><i class="fa-solid fa-location-dot" style="color: #d10a1e;"></i>{{contact.location}}</li>
+
+        <div class="d-flex justify-content-end align-items-center ">
+            <app-edit-contact (onEditResponse)="onEditResponse($event)"></app-edit-contact>
+            <button (click)="delete(contact.id)" class="me-3 btn btn-light fs-3 "><i class="fa-solid fa-trash" style="color: #fb0909;"></i></button>
+        </div>
+        </div>
+    </div>
+</div>

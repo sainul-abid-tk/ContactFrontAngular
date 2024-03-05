@@ -4,3 +4,6 @@
     padding: 0;
     overflow-x: hidden;
 }
+h1{
+    overflow-y: hidden;
+}

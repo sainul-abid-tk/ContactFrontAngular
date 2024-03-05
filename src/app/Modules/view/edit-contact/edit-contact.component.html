@@ -1,1 +1,114 @@
-<p>edit-contact works!</p>
+<div>
+    <button type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal1" class="me-3 btn btn-light fs-3 "><i class="fa-solid fa-pen-to-square" style="color: #1219de;"></i></button>
+    <!-- Modal -->
+    <div
+    class="modal fade modal-lg"
+    id="exampleModal1"
+    tabindex="-1"
+    aria-labelledby="exampleModalLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header w-100 justify-content-center d-flex">
+          <h1 class="modal-title text-center fs-2" id="exampleModalLabel">
+            Edit A Contcat
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <form #addContacts="ngForm">
+            <input
+              [(ngModel)]="updateContact.name"
+              name="name"
+              type="text"
+              required
+              class="form-control mb-3"
+              placeholder="Enter Name"
+            />
+            <input
+              [(ngModel)]="updateContact.phone"
+              name="phone"
+              required
+              pattern="[0-9]{10}"
+              #contPhone="ngModel"
+              type="number"
+              class="form-control mb-3"
+              placeholder="Enter Phone Number"
+            />
+            <div
+              *ngIf="contPhone.invalid && contPhone.touched"
+              class="text-danger fw-bold"
+            >
+              *Invalid PhoneNumber
+            </div>
+            <input
+              [(ngModel)]="updateContact.whatsapp"
+              name="whatsapp"
+              type="number"
+              required
+              pattern="[0-9]{10}"
+              #contaWhatsapp="ngModel"
+              class="form-control mb-3"
+              placeholder="Enter Whatsapp Number"
+            />
+            <div
+              *ngIf="contaWhatsapp.invalid && contaWhatsapp.touched"
+              class="text-danger fw-bold"
+            >
+              *Invalid WhatsappNumber
+            </div>
+            <input
+              [(ngModel)]="updateContact.email"
+              name="email"
+              email
+              required
+              #contEmail="ngModel"
+              type="email"
+              class="form-control mb-3"
+              placeholder="Enter Email"
+            />
+            <div
+              *ngIf="contEmail.invalid && contEmail.touched"
+              class="text-danger fw-bold"
+            >
+              *Invalid Email
+            </div>
+            <textarea
+              [(ngModel)]="updateContact.address"
+              name="address"
+              class="form-control w-100 mb-3"
+              placeholder="Enter Address"
+              id="myTextArea"
+              name="myTextArea"
+              rows="4"
+              cols="50"
+              required
+            ></textarea>
+            <input
+              [(ngModel)]="updateContact.location"
+              name="location"
+              type="text"
+              class="form-control mb-3"
+              placeholder="Enter Location Link"
+              required
+            />
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button (click)="cancel(updateContact.id)" type="button" class="btn btn-danger" data-bs-dismiss="modal">
+            Close
+          </button>
+          <button (click)="update(updateContact.id)" [disabled]="addContacts.invalid " type="submit" class="btn btn-success">Update</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
